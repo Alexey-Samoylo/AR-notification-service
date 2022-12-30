@@ -16,9 +16,9 @@ function Button ({param}) {
         <td class="dropdown">
                 <button class="dropbtn">Create mail</button>
             <div class="dropdown-content">
-                <div typeof="button" onClick={ButtonRusClick}>Ссылка 1</div>
-                <div typeof="button" onClick={ButtonEngClick}>Ссылка 2</div>
-                <div typeof="button" onClick={ButtonAlreadySend}>Ссылка 3</div>
+                <a href="mailto:&body=body?subject=subject"><div typeof="button" onClick={ButtonRusClick}>Rus</div></a>
+                <a href="mailto:&body=body?subject=subject"><div typeof="button" onClick={ButtonEngClick}>Eng</div></a>
+                <div typeof="button" onClick={ButtonAlreadySend}>already send</div>
             </div>
         </td>
     )

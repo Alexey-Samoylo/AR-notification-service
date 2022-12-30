@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import logo from '../../assets/image/logo.png'
 import ContentContext from '../../Context/ContentContext';
