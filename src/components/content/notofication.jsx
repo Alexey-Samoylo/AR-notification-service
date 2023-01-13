@@ -10,20 +10,29 @@ function Notification() {
 
 
     const [data, setData] = useState([]);
-    axios.defaults.withCredentials = true
-
+    axios.defaults.withCredentials = true;
+    
+    // useEffect(() => {
+    //     axios.get((`http://10.72.193.77:50008/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}%20`)).then(res => {console.log(res); setData(res.data.data)})
+    // }, []);
     useEffect(() => {
-        axios.get((`http://10.72.193.77:50008/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}%20`)).then(res => {console.log(res); setData(res.data.data)})
+        axios.get((`https://localhost:7295/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}`)).then(res => {console.log(res); setData(res.data.data)})
     }, []);
     const {id} = useParams();
     console.log(id)
+    console.log(data)
     console.log("вывод даты")
     console.log(data);
+
+    var firsttable = 0;
+    var secondtable = 0;
+
     return (
         <div className='card'>
 
             {data.map(el => {
-                if (el.optionId === 0) {
+                if (el.optionId === 0 && firsttable === 0) {
+                    firsttable += 1;
                     return (
                         <div className='notificationActive'>
                             <div className='table-header'>
@@ -57,7 +66,8 @@ function Notification() {
             })}
 
 {data.map(el => {
-                if (el.optionId === 0) {
+                if (el.optionId === 1 && secondtable === 0) {
+                    secondtable +=1;
                     return (
                         <div className='notificationActive'>
                             <div className='table-header'>

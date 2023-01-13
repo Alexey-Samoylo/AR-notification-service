@@ -2,8 +2,8 @@
 import { useContext } from 'react';
 import logo from '../../assets/image/logo.png'
 import ContentContext from '../../Context/ContentContext';
-import Notification from '../content/notification/notofication';
-import PaymentInquiry from '../content/payment inquiry/payment inquiry';
+import Notification from '../content/notofication';
+import PaymentInquiry from '../content/payment inquiry';
 import './header.css'
 
 function Header () {
