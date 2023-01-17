@@ -5,6 +5,7 @@ import axios from 'axios';
 import Button from './button/Button';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import DateInv from './button/DateInv';
 
 function Notification() {
 
@@ -12,18 +13,11 @@ function Notification() {
     const [data, setData] = useState([]);
     axios.defaults.withCredentials = true;
     
-    // useEffect(() => {
-    //     axios.get((`http://10.72.193.77:50008/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}%20`)).then(res => {console.log(res); setData(res.data.data)})
-    // }, []);
     useEffect(() => {
-        axios.get((`https://localhost:7295/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}`)).then(res => {console.log(res); setData(res.data.data)})
+        axios.get((`https://localhost:7295/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}`)).then(res => {console.log(res); console.log(res); setData(res.data.data)})
     }, []);
     const {id} = useParams();
-    console.log(id)
-    console.log(data)
-    console.log("вывод даты")
     console.log(data);
-
     var firsttable = 0;
     var secondtable = 0;
 
@@ -44,16 +38,18 @@ function Notification() {
                                         <th>invId</th>
                                         <th>invoiceDate</th>
                                         <th>clentCompany</th>
+                                        <th>Date</th>
                                         <th>mail</th>
                                     </tr>
                                     {data.map(el => {
                                         if (el.optionId ===0){
                                             return(
                                                 <tr className='tbody'>
-                                                    <td>{el.invId}</td>
+                                                    <td>{el.inv}</td>
                                                     <td>{el.invoiceDate}</td>
-                                                    <td>{el.clentCompany}</td>
-                                                    <Button param={el.Name}/>
+                                                    <td>{el.clientCompany}</td>
+                                                    <DateInv param={el.invoiceDate}/>
+                                                    <Button param={el.email}/>
                                                 </tr>
                                             )
                                         }
