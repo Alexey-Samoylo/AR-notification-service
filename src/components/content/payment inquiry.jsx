@@ -12,19 +12,38 @@ function PaymentInquiry() {
     const [allInv, setAllInv] = useState([])
     const [invID, setInvID] = useState();
     const [clientName, setClientName] = useState();
-    const [pageNumber, setPageNumber] = useState(5);
+    const [pageNumber, setPageNumber] = useState(1);
     const [pageSize, setPageSize] = useState(50);
-    const [totalPage, setTotalPage] = useState(53);
+    const [totalPage, setTotalPage] = useState();
+
+    useEffect (() => {
+        if (clientName === undefined) {
+            setClientName('%20')
+        };
+        if (invID === undefined) {
+            setInvID('%20')
+        };
+    }, [clientName, invID]);
+
+    useEffect(() => {
+        axios.get((`https://localhost:7295/Invoice/GetAllInvoices?SearchByClientNameTerm=${clientName}&SearchByInvoiceNumberTerm=${invID}&PageNumber=${pageNumber}&PageSize=${pageSize}`))
+        .then(res => { setAllInv(res.data.data); setTotalPage(res.data.paginationInfo.totalPages); })
+    }, [clientName, invID ,pageNumber, pageSize]);
 
     function SetInvID(event) {
         setInvID(event.target.value);
+        setPageNumber(1);
     }
     function SetClientName(event) {
         setClientName(event.target.value);
+        setPageNumber(1);
     }
 
     function SetPageSize () {
-        const SelectPageSize = (event) => setPageSize(event.target.value);
+        const SelectPageSize = (event) => {
+            setPageSize(event.target.value);
+            setPageNumber(1);
+        }
         
         return (
             <select onChange={SelectPageSize} value={pageSize}>
@@ -129,24 +148,7 @@ function PaymentInquiry() {
             </div>
         )
     };
-    useEffect (() => {
-        if (clientName === undefined) {
-            setClientName('%20')
-        };
-        if (invID === undefined) {
-            setInvID('%20')
-        };
-    }, [clientName, invID]);
-    // useEffect (() => {
-    //     if (invID === undefined) {
-    //         setInvID('%20')
-    //     }
-    // }, [invID]);
 
-    useEffect(() => {
-        axios.get((`https://localhost:7295/Invoice/GetAllInvoices?SearchByClientNameTerm=${clientName}&SearchByInvoiceNumberTerm=${invID}&PageNumber=${pageNumber}&PageSize=${pageSize}`)).then(res => { console.log(res); setAllInv(res.data.data) })
-    }, [clientName, invID ,pageNumber, pageSize]);
-     console.log(allInv)
     return (
         <div className="card">
             <div className='searchline'>

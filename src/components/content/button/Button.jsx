@@ -13,9 +13,9 @@ function Button ({param}) {
     };
     
     return (
-        <td class="dropdown">
-                <button class="dropbtn">Create mail</button>
-            <div class="dropdown-content">
+        <td className="dropdown">
+                <button className="dropbtn">Create mail</button>
+            <div className="dropdown-content">
                 <a href="mailto:&body=body?subject=subject"><div typeof="button" onClick={ButtonRusClick}>Rus</div></a>
                 <a href="mailto:&body=body?subject=subject"><div typeof="button" onClick={ButtonEngClick}>Eng</div></a>
                 <div typeof="button" onClick={ButtonAlreadySend}>already send</div>

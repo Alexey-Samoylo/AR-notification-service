@@ -14,10 +14,9 @@ function Notification() {
     axios.defaults.withCredentials = true;
     
     useEffect(() => {
-        axios.get((`https://localhost:7295/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}`)).then(res => {console.log(res); console.log(res); setData(res.data.data)})
+        axios.get((`https://localhost:7295/Invoice/GetInvoicesOfManager/managerGPN?managerGPN=${id}`)).then(res => {setData(res.data.data); console.log(res.data.data)})
     }, []);
     const {id} = useParams();
-    console.log(data);
     var firsttable = 0;
     var secondtable = 0;
 
@@ -48,7 +47,7 @@ function Notification() {
                                                     <td>{el.inv}</td>
                                                     <td>{el.invoiceDate}</td>
                                                     <td>{el.clientCompany}</td>
-                                                    <DateInv param={el.invoiceDate}/>
+                                                    <DateInv param={el.invoiceDate.slice(0,10)}/>
                                                     <Button param={el.email}/>
                                                 </tr>
                                             )
@@ -78,7 +77,7 @@ function Notification() {
                                         <th>mail</th>
                                     </tr>
                                     {data.map(el => {
-                                        if (el.optionId ===1){
+                                        if (el.optionId ===1 || el.optionId ===2 || el.optionId ===3 || el.optionId ===4){
                                             return(
                                                 <tr className='tbody'>
                                                     <td>{el.invId}</td>

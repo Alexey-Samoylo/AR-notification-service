@@ -6,7 +6,7 @@ import Notification from "./components/content/notofication";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 function App() {
-console.log('App');
+
   const [content, setContent] = useState(<Notification />);
   return (
     <ContentContext.Provider value={{content, setContent}}>
